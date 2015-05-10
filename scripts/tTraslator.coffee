@@ -25,4 +25,4 @@ module.exports = (robot) ->
           return 
         console.log "*******************"
         console.log data.data.translations[0].translatedText
-        res.send "is what I got"
+      res.send "#{data.data.translations[0].translatedText} is what I got"
