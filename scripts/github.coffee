@@ -1,11 +1,11 @@
 module.exports = (robot) ->
 
-  robot.hear /pull requests (.*)/i, (res) ->
-    repo_name = escape(res.match[1])
-    robot.http("https://api.github.com/repos/SamShah20393/#{repo_name}/pulls")
+  robot.hear /pull requests (.*)/i, (msg) ->
+    repo_name = escape(msg.match[1])
+    msg.http("https://api.github.com/repos/SamShah20393/#{repo_name}/pulls")
       .get() (err, res, body) ->
         try
           json = JSON.parse(body)
-          res.send "Working .."
+          msg.send "Working .."
         catch error
-          res.send "No pull requests found on #{repo_name}"
+          msg.send "No pull requests found on #{repo_name}"
