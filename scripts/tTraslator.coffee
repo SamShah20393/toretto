@@ -18,4 +18,5 @@ module.exports = (robot) ->
         res.send "Encountered an error :( #{err}"
         return
         data = JSON.parse(body)
-        console.log data
+        console.log "Got this"
+        res.send "#{data} is what I got"
