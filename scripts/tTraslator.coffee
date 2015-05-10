@@ -30,7 +30,7 @@ module.exports = (robot) ->
         console.log lang
     url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=ja&q=#{word}"
 
-    url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=#{lang}&target=en#&q=#{word}" if lang is "ja"   
+    url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=#{lang}&target=en#&q=#{word}" if lang is 'ja'   
     
     console.log(url);
     robot.http(url)
