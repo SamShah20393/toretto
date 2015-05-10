@@ -24,5 +24,5 @@ module.exports = (robot) ->
           console.log "################## FAILED"
           return 
         console.log "*******************"
-        console.log data["translations"]
+        console.log data
         res.send "is what I got"
