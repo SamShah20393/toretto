@@ -19,4 +19,4 @@ module.exports = (robot) ->
         return
         data = JSON.parse(body)
         console.log "Got this"
-        res.send "#{data} is what I got"
+        res.send "is what I got"
