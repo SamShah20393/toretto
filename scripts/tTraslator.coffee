@@ -12,8 +12,23 @@ module.exports = (robot) ->
 
   robot.hear /#((\w)+)/i, (res) ->
     word = res.match[1]
-    url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=ja&q=#{word}"
-    console.log(url);
+    lang = en
+    url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&target=en&q=#{word}"
+    robot.http(url)
+      .get() (err, resp, body) ->
+        if err
+          res.send "Lol, looks like google couldn't handle your language! :( #{err}"
+          return
+        try  
+          data = JSON.parse(body)
+        catch error
+          console.log "sorry, that went totaly over my head (dumb) "
+          return 
+        lang = data.data.translations[0].detectedSourceLanguage}
+    if lang is en    
+      url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=ja&q=#{word}"
+    else
+      url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=en&q=#{word}"
     robot.http(url)
       .get() (err, resp, body) ->
         if err
