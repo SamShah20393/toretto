@@ -18,7 +18,11 @@ module.exports = (robot) ->
         if err
           res.send "Encountered an error :( #{err}"
           return
-        data = JSON.parse(body)
+        try  
+          data = JSON.parse(body)
+        catch error
+          console.log "################## FAILED"
+           return 
         console.log "*******************"
         console.log data.translations
         res.send "is what I got"
