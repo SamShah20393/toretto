@@ -12,6 +12,7 @@ module.exports = (robot) ->
 
   robot.respond /(#(\w)+)/i, (res) ->
     word = res.match[1] 
+    res.send "I am groot"
     robot.http("https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=jp&q=walk")
     .get() (err, res, body) ->
       if err
