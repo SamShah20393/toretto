@@ -26,6 +26,7 @@ module.exports = (robot) ->
           console.log "################## FAILED"
           return 
         lang = data.data.translations[0].detectedSourceLanguage
+        console.log lang
     if lang is "en"  
       url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=ja&q=#{word}"
     else
