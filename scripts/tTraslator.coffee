@@ -25,7 +25,7 @@ module.exports = (robot) ->
           console.log "sorry, that went totaly over my head (dumb) "
           return 
         lang = data.data.translations[0].detectedSourceLanguage}
-    if lang is en    
+is    if lang  en    
       url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=ja&q=#{word}"
     else
       url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=en&q=#{word}"
@@ -41,4 +41,4 @@ module.exports = (robot) ->
           return 
         console.log "*******************"
         console.log data.data.translations[0].translatedText
-        res.send "#{word} / #{data.data.translations[0].translatedText}"
+        res.send "#{word} / #{data.data.translations[0].translatedText"
