@@ -6,6 +6,6 @@ module.exports = (robot) ->
       .get() (err, resp, body) ->
         try
           json = JSON.parse(body)
-          res.send "Working .."
+          res.send json.count
         catch error
           res.send "No pull requests found on #{repo_name}"
