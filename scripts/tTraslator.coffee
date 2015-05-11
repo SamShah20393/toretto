@@ -30,8 +30,16 @@ module.exports = (robot) ->
         langstring = JSON.stringify lang
         console.log(langstring)
         if lang in ['en']
-          console.log "$$$$$$"
           url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=entarget=ja&q=#{word}"
-        console.log lang
+          robot.http(url)
+          .get() (err, resp, body) ->
+            if err
+              res.send "Encountered an error :( #{err}"
+              return
+            try  
+              data = JSON.parse(body)
+            catch error
+              console.log "################## FAILED"
+              return 
         console.log data.data.translations[0].translatedText
         res.send "#{word} / #{data.data.translations[0].translatedText} / #{lang}"
