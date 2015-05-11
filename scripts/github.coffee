@@ -6,6 +6,6 @@ module.exports = (robot) ->
       .get() (err, resp, body) ->
         try
           json = JSON.parse(body)          
-          console.log json.length
+          res.send "There are #{json.length} pull requests on repo #{repo_name}"
         catch error
           res.send "No pull requests found on #{repo_name}"
