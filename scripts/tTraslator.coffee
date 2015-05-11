@@ -29,18 +29,5 @@ module.exports = (robot) ->
         console.log "##################"
         lang = JSON.stringify lang
         console.log lang
-    url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=jp&target=en&q=#{word}"
-    console.log(url);
-    robot.http(url)
-      .get() (err, resp, body) ->
-        if err
-          res.send "Encountered an error :( #{err}"
-          return
-        try  
-          data = JSON.parse(body)
-        catch error
-          console.log "################## FAILED"
-          return 
-        console.log "*******************"
-        console.log data.data
+        console.log data.data.translations[0].translatedText
         res.send "#{word} / #{data.data.translations[0].translatedText} / #{lang}"
