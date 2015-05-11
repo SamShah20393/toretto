@@ -22,15 +22,8 @@ scripts.
 [yeoman]: http://yeoman.io
 [generator-hubot]: https://github.com/github/generator-hubot
 
-### Why "Triatomic"?
 
-HipChat Hubot for Heroku is kind of a mouthful. Abbreviated, you get
-HHH, which is the molecular abbreviation to triatomic hydrogen, which in
-turn sounds cooler than "HHH". In the end, you can give your Triatomic bot
-whatever public-facing name you want, since you'll be creating a unique HipChat
-user account for it to use.
-
-### Running Triatomic Locally
+### Running Toretto Locally
 
 You can test your hubot by running the following, however some plugins will not
 behave as expected unless the [environment variables](#configuration) they rely
@@ -141,7 +134,7 @@ from `external-scripts.json` and you don't need to worry about redis at all.
 
 ### The Easy Way
 
-The easy way to get Triatomic running on Heroku is to to click this big purple
+The easy way to get Toretto running on Heroku is to to click this big purple
 button and fill out the required fields!
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/hipchat/triatomic)
@@ -189,5 +182,3 @@ You may want to get comfortable with `heroku logs` and `heroku restart` if
 you're having issues.
 
 ## Thanks
-
-Special thanks to [Robohash](http://robohash.org) for the sweet logo :)
