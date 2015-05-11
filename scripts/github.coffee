@@ -6,6 +6,7 @@ module.exports = (robot) ->
       .get() (err, resp, body) ->
         try
           json = JSON.parse(body)
-          res.send json.length
+          
+          console.log res.send json.length
         catch error
           res.send "No pull requests found on #{repo_name}"
