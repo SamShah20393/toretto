@@ -42,5 +42,5 @@ module.exports = (robot) ->
             catch error
               console.log "################## FAILED"
               return 
-        console.log data.data.translations[0].translatedText
-        res.send "#{word} / #{data.data.translations[0].translatedText} / #{lang}"
+            console.log data.data.translations[0].translatedText
+          res.send "#{word} / #{data.data.translations[0].translatedText} / #{lang}"
