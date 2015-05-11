@@ -33,6 +33,6 @@ module.exports = (robot) ->
             catch error
               res.send "That went over my head: #{err} (jackie)"
               return 
-            res.send "#{word} / #{data.data.translations[0].translatedText}"
+            res.send "1 #{word} / #{data.data.translations[0].translatedText}"
         else
-          res.send "#{word} / #{data.data.translations[0].translatedText}"
+          res.send "1 #{word} / #{data.data.translations[0].translatedText}"
