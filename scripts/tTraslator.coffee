@@ -43,4 +43,4 @@ module.exports = (robot) ->
               console.log "################## FAILED"
               return 
             console.log data.data.translations[0].translatedText
-          res.send "#{word} / #{data.data.translations[0].translatedText} / #{lang}"
+            res.send "#{word} / #{data.data.translations[0].translatedText} / #{lang}"
