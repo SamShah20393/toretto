@@ -27,6 +27,7 @@ module.exports = (robot) ->
           return 
         lang = data.data.translations[0].detectedSourceLanguage
         console.log "##################"
+        lang = JSON.stringify lang
         console.log lang
     url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=ja&q=#{word}"
     if lang is "ja"
