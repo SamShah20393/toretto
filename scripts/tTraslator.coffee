@@ -44,3 +44,5 @@ module.exports = (robot) ->
               return 
             console.log data.data.translations[0].translatedText
             res.send "#{word} / #{data.data.translations[0].translatedText} / #{lang}"
+        else
+          res.send "#{word} / #{data.data.translations[0].translatedText} / #{lang}"
