@@ -29,7 +29,7 @@ module.exports = (robot) ->
         console.log "##################"
         langstring = JSON.stringify lang
         console.log(langstring)
-        if langstring in ['ja']
+        if lang is 'ja'
           console.log "$$$$$$"
         console.log lang
         console.log data.data.translations[0].translatedText
