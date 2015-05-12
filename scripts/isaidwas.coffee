@@ -17,9 +17,14 @@ module.exports = (robot) ->
 
   robot.respond /have more soda/i, (res) ->
     # Get number of sodas had (coerced to a number).
-    sodasHad = robot.brain.get('totalSodas')
-    robot.reply "total #{sodasHad}"
-    
+    sodasHad = robot.brain.get('totalSodas') * 1 or 0
+    if sodasHad > 4
+      res.reply "I'm too fizzy.."
+    else
+      res.reply 'Sure!'
+    robot.brain.set 'totalSodas', sodasHad+1
+    res.send "total #{sodasHad}"
+
   robot.respond /sleep it off/i, (res) ->
     robot.brain.set 'totalSodas', 0
     msg.reply 'zzzzz'
