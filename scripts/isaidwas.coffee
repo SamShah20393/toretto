@@ -6,7 +6,7 @@ module.exports = (robot) ->
     robot.http(url)
       .get() (err, resp, body) ->
         if err
-          res.send "Got stuck here : #{err} (areyoukiddingme)"
+          res.send "(areyoukiddingme) Got stuck here : #{err} "
           return
         try  
           data = JSON.parse(body)
@@ -14,3 +14,18 @@ module.exports = (robot) ->
           res.send "That went over my head: #{err} (jackie)"
           return 
         console.log data
+
+robot.respond /have a soda/i, (res) ->
+  # Get number of sodas had (coerced to a number).
+  sodasHad = robot.brain.get('totalSodas') * 1 or 0
+
+  if sodasHad > 4
+    res.reply "I'm too fizzy.."
+
+  else
+    res.reply 'Sure!'
+
+    robot.brain.set 'totalSodas', sodasHad+1
+robot.respond /sleep it off/i, (res) ->
+  robot.brain.set 'totalSodas', 0
+  msg.reply 'zzzzz'
