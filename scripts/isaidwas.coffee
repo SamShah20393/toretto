@@ -24,6 +24,7 @@ module.exports = (robot) ->
     else
       res.reply 'Sure!'
     robot.brain.set 'totalSodas', sodasHad+1
+    robot.reply "total #{sodasHad}"
 
   robot.respond /sleep it off/i, (res) ->
     robot.brain.set 'totalSodas', 0
