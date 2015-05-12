@@ -18,6 +18,7 @@ module.exports = (robot) ->
 
   robot.respond /have more soda/i, (res) ->
     # Get number of sodas had (coerced to a number).
+    robot.brain.set 'totalSodas', 15
     sodasHad = robot.brain.get 'totalSodas'
     if sodasHad > 4
       res.reply "I'm too fizzy.."
