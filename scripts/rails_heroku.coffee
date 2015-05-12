@@ -1,6 +1,6 @@
 {spawn} = require 'child_process'
 
-module exports = (robot) ->
+module.exports = (robot) ->
 
   robot.hear /ls/i, (res) ->
     ls = spawn 'ls'
