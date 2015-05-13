@@ -2,7 +2,7 @@ module.exports = (robot) ->
   robot.brain.set 'totalSodas', 15
   console.log "@@@@@@@@@@@@@@@@@@@@@@@@@"
   robot.hear /\?\?\?(.*)/i, (res) ->
-    historyfor = res.room;
+    historyfor = res.message.room;
     console.log "looking for #{historyfor}"
     rooms = robot.brain.get historyfor
     if !rooms
@@ -23,8 +23,8 @@ module.exports = (robot) ->
 
   makeroom = (name, id) ->
     robot.brain.set 'rooms',true
-    robot.brain.set name, id
-    console.log "made room for #{name} at #{id}"
+    robot.brain.set name.toLowerCase, id
+    console.log "made room for #{name.toLowerCase} at #{id}"
 
   robot.respond /have more soda/i, (res) ->
     # Get number of sodas had (coerced to a number).
