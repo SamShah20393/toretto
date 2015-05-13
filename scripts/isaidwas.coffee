@@ -16,7 +16,7 @@ module.exports = (robot) ->
             res.send "That went over my head: #{error} (jackie)"
             return
     else
-      url = "https://api.hipchat.com/v2/room/room_id/history?date=2015-05-12&timezone=Asia/Tokyo&format=json&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+      url = "https://api.hipchat.com/v2/room/#{room_id}/history?date=2015-05-12&timezone=Asia/Tokyo&format=json&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
       robot.http(url)
         .get() (err, resp, body) ->
           if err
