@@ -15,7 +15,7 @@ module.exports = (robot) ->
             makeroom room.name,room.id for room in data.items
             
           catch error
-            res.send "That went over my head: #{err} (jackie)"
+            res.send "That went over my head: #{error} (jackie)"
             return
     res.send "I got all that you need" 
 
