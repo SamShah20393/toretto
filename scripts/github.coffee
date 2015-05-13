@@ -2,7 +2,7 @@ module.exports = (robot) ->
   github_users = {"samkit": "SamShah20393", "mahesh": "avellable", "amit": "amiit-github"}
 
   robot.hear /pull requests on (.*) of (.*)/i, (res) ->
-    user = escape(res.match[2])
+    user = github_users[escape(res.match[2])]
     repo_name = escape(res.match[1])
     res.http("https://api.github.com/repos/#{user}/#{repo_name}/pulls")
       .get() (err, resp, body) ->
