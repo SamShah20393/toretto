@@ -2,7 +2,7 @@ module.exports = (robot) ->
   robot.brain.set 'totalSodas', 15
   console.log "@@@@@@@@@@@@@@@@@@@@@@@@@"
   robot.hear /\?\?\?(.*)/i, (res) ->
-    url = "https://api.hipchat.com/v2/room/#{res.message.room}/history?&date=2015-05-12&timezone=Asia/Tokyo&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+    url = "https://api.hipchat.com/v2/room/Wergroot/history?&date=2015-05-12&timezone=Asia/Tokyo&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
     robot.http(url)
       .get() (err, resp, body) ->
