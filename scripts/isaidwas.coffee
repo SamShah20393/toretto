@@ -3,14 +3,15 @@ module.exports = (robot) ->
   console.log "@@@@@@@@@@@@@@@@@@@@@@@@@"
   robot.hear /\?\?\?(.*)/i, (res) ->
     url = "https://api.hipchat.com/v2/room?auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
-    console.log(url);
     robot.http(url)
       .get() (err, resp, body) ->
         if err
-          res.send "(areyoukiddingme) Got stuck here : #{err} "
+          res.send "(areyoukiddingme) I just wanted the rooms and I got stuck here : #{err} "
           return
         try  
           data = JSON.parse(body)
+          robot.brain.set data.items[0].name, data.items[0].id
+           res.send " I am in #{data.items[0].name} #{data.items[0].id}"  
         catch error
           res.send "That went over my head: #{err} (jackie)"
           return 
