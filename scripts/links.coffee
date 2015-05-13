@@ -1,10 +1,10 @@
 module.exports = (robot) ->
   
-  robot.hear /(.*) http(.*)?\w/i, (res) ->
+  robot.hear /(.*) http(.*)\w?/i, (res) ->
     robot.brain.data.links ||= []
     robot.brain.data.links.push {"link": "http#{res.match[2]}", "context": res.match[1]}
   
-  robot.hear /(.*) https(.*)?\w/i, (res) ->
+  robot.hear /(.*) https(.*)?\w?/i, (res) ->
     robot.brain.data.links ||= []
     robot.brain.data.links.push {"link": "https#{res.match[2]}", "context": res.match[1]}
     
