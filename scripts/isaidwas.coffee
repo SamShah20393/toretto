@@ -1,8 +1,6 @@
 module.exports = (robot) ->
-  robot.brain.set 'totalSodas', 15
-  console.log "@@@@@@@@@@@@@@@@@@@@@@@@@"
   robot.hear /\?\?\?(.*)/i, (res) ->
-    historyfor = res.message.room;
+    console.log res;
     console.log "looking for #{historyfor}"
     rooms = robot.brain.get historyfor
     if !rooms
