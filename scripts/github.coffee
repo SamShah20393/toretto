@@ -30,7 +30,7 @@ module.exports = (robot) ->
           else
             res.send "There are #{json.length} branches of #{repo_name}"
             str = ""
-            str += "\n#{json.name}"
+            str += "\n#{branch.name}" for branch in json 
             res.send str
         catch err
           res.send "Something went wrong!"
