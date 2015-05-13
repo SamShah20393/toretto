@@ -1,3 +1,19 @@
+# Description:
+#   Remembers all the links and can retrieve at any time
+#
+# Dependencies:
+#   None
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   torreto show me links
+#   torreto clear all links
+#
+# Author
+#   avellable
+
 module.exports = (robot) ->
   
   robot.hear /(.*) (http[^\s]*)/i, (res) ->
