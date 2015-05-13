@@ -11,7 +11,7 @@ module.exports = (robot) ->
         try  
           data = JSON.parse(body)
           robot.brain.set data.items[0].name, data.items[0].id
-           res.send " I am in #{data.items[0].name} #{data.items[0].id}"  
+          res.send " I am in #{data.items[0].name} #{data.items[0].id}"  
         catch error
           res.send "That went over my head: #{err} (jackie)"
           return 
