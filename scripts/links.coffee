@@ -26,4 +26,4 @@ module.exports = (robot) ->
     res.send "All links have been forgotten!"
     
   robot.respond /show me links/i, (res) ->
-    res.send "#{link.link} something about: \"#{link.context}\" at: #{link.time}" for link in robot.brain.data.links
+    res.send "#{link.link} something about: \"#{link.context}\" at: #{link.time.getTime}" for link in robot.brain.data.links
