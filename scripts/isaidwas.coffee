@@ -18,15 +18,6 @@ module.exports = (robot) ->
             res.send "That went over my head: #{err} (jackie)"
             return
     res.send "I got all that you need" 
-    console.log data
-    room = res.message.id
-    console.log room
-    room = res.message.room
-    console.log room
-    room = res.message.user.id       
-    console.log room
-    room = res.message.user.name       
-    console.log room
 
   makeroom = (name, id) ->
     robot.brain.set rooms,true
