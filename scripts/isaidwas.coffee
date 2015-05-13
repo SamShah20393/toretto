@@ -17,6 +17,13 @@ module.exports = (robot) ->
         console.log data
         room = res.message.id
         console.log room
+        room = res.message.room
+        console.log room
+        room = res.message.user.id       
+        console.log room
+        room = res.message.user.name       
+        console.log room
+
 
   robot.respond /have more soda/i, (res) ->
     # Get number of sodas had (coerced to a number).
