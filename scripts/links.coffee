@@ -1,6 +1,6 @@
 module.exports = (robot) ->
   
-  robot.hear /(*.) http\:\/\/(*.)/i, (res) ->
+  robot.hear /(*.) http\\:\\/\\/(*.)/i, (res) ->
     robot.brain.data.links ||= {}
     robot.brain.data.links.push {"link": "http://#{res.match[2]}", "context": res.match[1]}
     
