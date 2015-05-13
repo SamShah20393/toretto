@@ -15,7 +15,7 @@ module.exports = (robot) ->
           res.send "That went over my head: #{err} (jackie)"
           return 
         console.log data
-        room = res.message.room
+        room = res.message.id
         console.log room
 
   robot.respond /have more soda/i, (res) ->
