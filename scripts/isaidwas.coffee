@@ -2,7 +2,9 @@ module.exports = (robot) ->
   robot.brain.set 'totalSodas', 15
   console.log "@@@@@@@@@@@@@@@@@@@@@@@@@"
   robot.hear /\?\?\?(.*)/i, (res) ->
-    rooms = robot.brain.get 'rooms'
+    historyfor = res.room;
+    console.log "looking for #{historyfor}"
+    rooms = robot.brain.get historyfor
     if !rooms
       url = "https://api.hipchat.com/v2/room?auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
       robot.http(url)
