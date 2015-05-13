@@ -12,15 +12,15 @@ module.exports = (robot) ->
             return
           try  
             data = JSON.parse(body)
-            makeroom room.name,room.id for room in data.items
-            
+            makeroom room.name,room.id for room in data.items        
           catch error
             res.send "That went over my head: #{error} (jackie)"
             return
-    res.send "I got all that you need" 
+    else
+      res.send "I got all that you need" 
 
   makeroom = (name, id) ->
-    robot.brain.set rooms,true
+    robot.brain.set 'rooms',true
     robot.brain.set name, id
     console.log "made room for #{name} at #{id}"
 
