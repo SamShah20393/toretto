@@ -10,7 +10,9 @@ module.exports = (robot) ->
           return
         try  
           data = JSON.parse(body)
+          makeroom room.name,room.id for room in data.items
           robot.brain.set data.items[0].name, data.items[0].id
+
           res.send " I am in #{data.items[0].name} #{data.items[0].id}"  
         catch error
           res.send "That went over my head: #{err} (jackie)"
@@ -25,6 +27,9 @@ module.exports = (robot) ->
         room = res.message.user.name       
         console.log room
 
+  makeroom = (name, id) ->
+    robot.brain.set name, id
+    console.log "made room for #{name} at #{id}"
 
   robot.respond /have more soda/i, (res) ->
     # Get number of sodas had (coerced to a number).
