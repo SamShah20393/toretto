@@ -9,4 +9,4 @@ module.exports = (robot) ->
     res.send "All links have been forgotten!"
     
   robot.respond /show me links/i, (res) ->
-    res.send link.link for link in robot.brain.data.links
+    res.send "#{link.link} context: You were talking something about \"#{link.context}\"" for link in robot.brain.data.links
