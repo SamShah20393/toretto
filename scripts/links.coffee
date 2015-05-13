@@ -17,8 +17,9 @@
 module.exports = (robot) ->
   
   robot.hear /(.*) (http[^\s]*)/i, (res) ->
+    date = new Date
     robot.brain.data.links ||= []
-    robot.brain.data.links.push {"link": res.match[2], "context": res.match[1], "time": new Date.getTime()}
+    robot.brain.data.links.push {"link": res.match[2], "context": res.match[1], "time": date.getTime()}
   
   robot.respond /clear links/i, (res) ->
     robot.brain.data.links = []
