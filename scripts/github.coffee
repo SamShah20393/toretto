@@ -1,3 +1,19 @@
+# Descriptions:
+#   Lazy to open github to see pull requets?
+#
+# Dependencies:
+#   None
+#
+# Configuration:
+#   Map names and github usernames in gihub_users hash
+#
+# Commands:
+#   torreto list pull requests on <repo_name> of <name_mapped>
+#   torreto list branches on <repo_name> of <name_mapped>
+#
+# Author:
+#   avellable
+
 module.exports = (robot) ->
   github_users = {"samkit": "SamShah20393", "mahesh": "avellable", "amit": "amiit-github"}
 
