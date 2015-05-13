@@ -17,3 +17,20 @@ module.exports = (robot) ->
             res.send str
         catch err
           res.send "Something went wrong! "
+          
+  robot.respond /list branches on (.*) of (.*)/i, (res) ->
+    user = github_users[escape(res.match[2])]
+    repo_name = escape(res.match[1])
+    res.http("https://api.github.com/repos/#{user}/#{repo_name}/branches")
+      .get() (err, resp, body) ->
+        try
+          json = JSON.parse(body)
+          if json.length == 0
+            res.send "No branches found on #{repo_name}"
+          else
+            res.send "There are #{json.length} branches of #{repo_name}"
+            str = ""
+            str += "\n#{json.name}"
+            res.send str
+        catch err
+          res.send "Something went wrong!"
