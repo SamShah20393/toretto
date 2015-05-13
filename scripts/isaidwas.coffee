@@ -23,8 +23,8 @@ module.exports = (robot) ->
 
   makeroom = (name, id) ->
     robot.brain.set 'rooms',true
-    robot.brain.set name.toLowerCase, id
-    console.log "made room for #{name.toLowerCase} at #{id}"
+    robot.brain.set name.toLowerCase(), id
+    console.log "made room for #{name.toLowerCase()} at #{id}"
 
   robot.respond /have more soda/i, (res) ->
     # Get number of sodas had (coerced to a number).
