@@ -3,7 +3,7 @@
 module.exports = (robot) ->
 
   robot.hear /ls/i, (res) ->
-    ls = spawn 'ls'
+    ls = spawn 'heroku logs -a mi-bot'
     # receive all output and process
     ls.stdout.on 'data', (data) -> res.send data.toString().trim()
     
