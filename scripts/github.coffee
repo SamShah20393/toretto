@@ -1,8 +1,10 @@
 module.exports = (robot) ->
+  github_users = {"samkit": "SamShah20393", "mahesh": "avellable", "amit": "amiit-github"}
 
-  robot.hear /pull requests (.*)/i, (res) ->
+  robot.hear /pull requests on (.*) of (.*)/i, (res) ->
+    user = escape(res.match[2])
     repo_name = escape(res.match[1])
-    res.http("https://api.github.com/repos/SamShah20393/#{repo_name}/pulls")
+    res.http("https://api.github.com/repos/#{user}/#{repo_name}/pulls")
       .get() (err, resp, body) ->
         try
           json = JSON.parse(body)          
@@ -13,5 +15,5 @@ module.exports = (robot) ->
             str = ""
             str += "\n#{pull_request.id} -> #{pull_request.title} is [#{pull_request.state}] -> link: #{pull_request.url}" for pull_request in json
             res.send str
-        catch error
+        catch err
           res.send "Something went wrong! "
