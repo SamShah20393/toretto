@@ -13,11 +13,13 @@
 module.exports = (robot)  ->
 
   robot.hear /\([A-Z]+\)/i, (res) ->
+    console.log "https://api.hipchat.com/v2/emoticon?auth_token=#{process.env.HIPCHAT_AUTH_TOKEN}"
     res.http("https://api.hipchat.com/v2/emoticon?auth_token=#{process.env.HIPCHAT_AUTH_TOKEN}")
       .get() (err, resp, body) ->
       	try
+      	  console.log body
       	  emoticons = JSON.parse(body)
-      	  a = Math.random
+      	  a = Math.random()
       	  b = emoticons.length
       	  console.log a
       	  console.log b
