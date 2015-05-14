@@ -17,7 +17,11 @@ module.exports = (robot)  ->
       .get() (err, resp, body) ->
       	try
       	  emoticons = JSON.parse(body)
-      	  console.log Math.floor(Math.random() * emoticons.length)
+      	  a = Math.random
+      	  b = emoticons.length
+      	  console.log a
+      	  console.log b
+      	  console.log Math.floor(a * b)
       	  res.send "(#{emoticons[Math.floor(Math.random() * emoticons.length)].shortcut})"
       	catch err
       	  res.send "Something went wrong!"
