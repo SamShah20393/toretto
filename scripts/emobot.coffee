@@ -1,115 +1,22 @@
-# emobot.coffee
-# returns random emo from hipchats emo list
+# Description:
+#  Sends random hipchat emoticon in response heard emoticon
+#
+# Dependencies:
+#   None
+#
+# Command:
+#   Send an emoticon in conversation
+#
+# Author:
+#   Samkit
 
 module.exports = (robot)  ->
 
-  quotes = ["(embarrassed)", 
-			"(oops)", 
-			"(thumbsup)", 
-			"(thumbsdown)", 
-			"(allthethings)", 
-			"(android)", 
-			"(areyoukiddingme)", 
-			"(arrington)", 
-			"(ashton)", 
-			"(awyeah)", 
-			"(badpokerface)", 
-			"(basket)", 
-			"(beer)", 
-			"(bumble)", 
-			"(bunny)", 
-			"(cadbury)", 
-			"(cake)", 
-			"(candycorn)", 
-			"(caruso)", 
-			"(cereal)", 
-			"(challengeaccepted)", 
-			"(chewie)", 
-			"(chocobunny)", 
-			"(cholo)", 
-			"(chompy)", 
-			"(chris)", 
-			"(coffee)", 
-			"(content)", 
-			"(cornelius)", 
-			"(dealwithit)", 
-			"(derp)", 
-			"(disapproval)", 
-			"(dosequis)", 
-			"(ducreux)", 
-			"(dumb)", 
-			"(facepalm)", 
-			"(fap)", 
-			"(foreveralone)", 
-			"(freddie)", 
-			"(fry)", 
-			"(fu)", 
-			"(fuckyeah)", 
-			"(garret)", 
-			"(gates)", 
-			"(gaytroll)", 
-			"(ghost)", 
-			"(goodnews)", 
-			"(greenbeer)", 
-			"(gtfo)", 
-			"(haveaseat)", 
-			"(heart)", 
-			"(hipchat)", 
-			"(hipster)", 
-			"(huh)", 
-			"(ilied)", 
-			"(itsatrap)", 
-			"(jackie)", 
-			"(jobs)", 
-			"(kennypowers)", 
-			"(krang)", 
-			"(kwanzaa)", 
-			"(lincoln)", 
-			"(lol)", 
-			"(lolwut)", 
-			"(megusta)", 
-			"(menorah)", 
-			"(notbad)", 
-			"(nothingtodohere)", 
-			"(ohcrap)", 
-			"(okay)", 
-			"(omg)", 
-			"(orly)", 
-			"(pbr)", 
-			"(pete)", 
-			"(philosoraptor)", 
-			"(pirate)", 
-			"(pokerface)", 
-			"(poo)", 
-			"(present)", 
-			"(pumpkin)", 
-			"(rageguy)", 
-			"(rebeccablack)", 
-			"(reddit)", 
-			"(rudolph)", 
-			"(sadpanda)", 
-			"(sadtroll)", 
-			"(samuel)", 
-			"(santa)", 
-			"(scumbag)", 
-			"(seomoz)", 
-			"(shamrock)", 
-			"(skyrim)", 
-			"(stare)", 
-			"(sweetjesus)", 
-			"(taft)", 
-			"(tree)", 
-			"(troll)", 
-			"(truestory)", 
-			"(turkey)", 
-			"(washington)", 
-			"(wat)", 
-			"(wtf)", 
-			"(yey)", 
-			"(yodawg)", 
-			"(yuno)", 
-			"(zoidberg)", 
-			"(zzz)"]
-
   robot.hear /\([A-Z]+\)/i, (res) ->
-    res.send res.random quotes
+    res.http("https://api.hipchat.com/v2/emoticon?auth_token=#{process.env.HIPCHAT_AUTH_TOKEN}")
+      .get (err, resp, body) ->
+      	try
+      	  emoticons = JSON.parse(body)
+      	  res.send "(#{emoticons[Math.floor(Math.random() * emoticons.length)].shortcut})"
+      	catch err
+      	  res.send "Something went wrong!"
