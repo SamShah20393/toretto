@@ -13,6 +13,8 @@
 module.exports = (robot)  ->
 
   robot.hear /\([A-Z]+\)/i, (res) ->
+    console.log process.env.HIPCHAT_AUTH_TOKEN
+    console.log "https://api.hipchat.com/v2/emoticon?auth_token=#{process.env.HIPCHAT_AUTH_TOKEN}"
     res.http("https://api.hipchat.com/v2/emoticon?auth_token=#{process.env.HIPCHAT_AUTH_TOKEN}")
       .get (err, resp, body) ->
       	try
