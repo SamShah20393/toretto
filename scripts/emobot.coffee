@@ -17,8 +17,7 @@ module.exports = (robot)  ->
       .get() (err, resp, body) ->
       	try
       	  emoticons = JSON.parse(body)
-      	  console.log process.env.HIPCHAT_AUTH_TOKEN
-      	  emoticons[Math.floor(Math.random() * emoticons.length)].shortcut
+      	  console.log Math.floor(Math.random() * emoticons.length)
       	  res.send "(#{emoticons[Math.floor(Math.random() * emoticons.length)].shortcut})"
       	catch err
       	  res.send "Something went wrong!"
