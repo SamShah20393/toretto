@@ -2,10 +2,13 @@ module.exports = (robot) ->
 
   time_quotes = /// (hour|day|week|minute|months|moment|year)(s)* ///
   trigger_quotes = /// (remember|think|guess|dicuss)(ed)* ///
-  important_quotes = /// (important|need|required|should|check|remember|keep|mind|like|great)(ed)* ///
+  important_quotes = /// (important|need|required|should|check|remember|keep|mind|like|great|reference|refer|idea)(ed)* ///
+  
+  class impTalk
+  constructor: (name,) ->
+    @name = name
 
-
-  robot.hear /(.*)(important|need|required|should|check|remember|keep|mind|like|great)(ed)*(.*)/i, (res) ->
+  robot.hear /(.*)(good|better|important|need|required|should|check|remember|keep|mind|like|great)(ed)*(.*)/i, (res) ->
     res.reply("I hear you!")
 
   robot.hear /\?\?\?(.*)/i, (res) ->
