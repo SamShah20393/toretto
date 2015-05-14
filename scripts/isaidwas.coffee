@@ -1,4 +1,13 @@
 module.exports = (robot) ->
+
+  time_quotes = /// (hour|day|week|minute|months|moment|year)(s)* ///
+  trigger_quotes = /// (remember|think|guess|dicuss)(ed)* ///
+  important_quotes = /// (important|need|required|should|check|remember|keep|mind|like|great)(ed)* ///
+
+
+  robot.hear /(.*)important_quotes(.*)/i, (res) ->
+    res.reply("I hear you!")
+
   robot.hear /\?\?\?(.*)/i, (res) ->
     historyfor = res.message.room;
     room_id = robot.brain.get historyfor
@@ -24,6 +33,7 @@ module.exports = (robot) ->
             return
           try  
             data = JSON.parse(body)
+
             console.log data;        
           catch error
             res.send "That went over my head: #{error} (jackie)"
