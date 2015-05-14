@@ -5,7 +5,7 @@ module.exports = (robot) ->
   important_quotes = /// (important|need|required|should|check|remember|keep|mind|like|great)(ed)* ///
 
 
-  robot.hear /(.*)important_quotes(.*)/i, (res) ->
+  robot.hear /(.*)(important_quotes)(.*)/i, (res) ->
     res.reply("I hear you!")
 
   robot.hear /\?\?\?(.*)/i, (res) ->
