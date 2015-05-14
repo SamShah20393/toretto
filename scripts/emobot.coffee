@@ -20,3 +20,4 @@ module.exports = (robot)  ->
       	  res.send "(#{emoticons[Math.floor(Math.random() * emoticons.length)].shortcut})"
       	catch err
       	  res.send "Something went wrong!"
+      	  console.log err
