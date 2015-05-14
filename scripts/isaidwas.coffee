@@ -2,7 +2,7 @@ module.exports = (robot) ->
 
   time_quotes = /// (hour|day|week|minute|months|moment|year)(s)* ///
   trigger_quotes = /// (remember|think|guess|dicuss)(ed)* ///
-  important_quotes = /// (important|need|required|should|check|remember|keep|mind|like|great|reference|refer|idea)(ed)* ///
+  important_quotes = /// (important|need|required|should|check|remember|keep|mind|like|great|reference)(ed)* ///
   
   class impTalk
   constructor: (name,) ->
