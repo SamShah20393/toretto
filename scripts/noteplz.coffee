@@ -29,7 +29,6 @@ module.exports = (robot) ->
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
-    T19:45:09
     url = "https://api.hipchat.com/v2/room/Wergroot/history?&date=2015-05-16T05:37:50&timezone=Asia/Tokyo&format=json&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
     robot.http(url)
