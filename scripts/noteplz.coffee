@@ -18,10 +18,12 @@
 class Note
   constructor: (@title,@date,@total) ->
 
-noteMode = false    
+   
 
 module.exports = (robot) ->
   
+  noteMode = false 
+
   robot.hear /take notes about (.*)/i, (res) ->
     title = res.match[1]
     date = new Date
