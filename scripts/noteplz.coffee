@@ -31,10 +31,13 @@ module.exports = (robot) ->
     robot.brain.set title,note
     res.send "Sure, go ahead type in"
 
-  if nodeMode
-    robot.hear /(.*)/i, (res) ->
-      res.send "Listening"
-    
+  robot.hear /(.*)/i, (res) ->
+      if noteMode
+        res.send "Listening"
+      else
+        res.send "AM to lazzy"
+        noteMode = true;
+  
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
