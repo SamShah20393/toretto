@@ -18,26 +18,29 @@
 class Note
   constructor: (@title,@date,@total) ->
 
-   
-
 module.exports = (robot) ->
   
   noteMode = false 
+  noteTitle = null
 
   robot.hear /take notes about (.*)/i, (res) ->
     title = res.match[1]
+    noteTitle = title
     date = new Date
-    note = new Note title,date
+    note = new Note title,date,0
     robot.brain.set title,note
     res.send "Sure, go ahead type in"
 
   robot.hear /(.*)/i, (res) ->
-      if noteMode
-        res.send "Listening"
-      else
-        res.send "AM to lazzy"
-        noteMode = true;
-  
+    if noteMode
+      currentNote = robot.brain.get  noteTitle
+      currentNote.total = currentNote.total + 1
+      robot.brain.set noteTitle,currenNote
+      res.send "new line no #{currentNote.total}"
+    else
+      res.send "AM too lazzy"
+      noteMode = true
+
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
