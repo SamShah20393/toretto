@@ -35,7 +35,7 @@ module.exports = (robot) ->
     if noteMode
       currentNote = robot.brain.get  noteTitle
       currentNote.total = currentNote.total + 1
-      robot.brain.set noteTitle,currenNote
+      robot.brain.set noteTitle,currentNote
       res.send "new line no #{currentNote.total}"
     else
       res.send "AM too lazzy"
