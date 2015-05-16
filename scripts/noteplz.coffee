@@ -14,8 +14,11 @@
 # Author
 #   Samkit
 
+
 class Note
-  constructor: (@title,@date) ->
+  constructor: (@title,@date,@total) ->
+
+noteMode = false    
 
 module.exports = (robot) ->
   
@@ -26,6 +29,10 @@ module.exports = (robot) ->
     robot.brain.set title,note
     res.send "Sure, go ahead type in"
 
+  if nodeMode
+    robot.hear /(.*)/i, (res) ->
+      res.send "Listening"
+    
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
