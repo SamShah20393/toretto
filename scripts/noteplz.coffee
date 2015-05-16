@@ -29,7 +29,7 @@ module.exports = (robot) ->
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
-    url = "https://api.hipchat.com/v2/room/Wergroot/history?&date=2015-05-16T05:37:50.409Z&timezone=Asia/Tokyo&format=json&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+    url = "https://api.hipchat.com/v2/room/Wergroot/history?&date=#{note.date}&timezone=Asia/Tokyo&format=json&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
     robot.http(url)
       .get() (err, resp, body) ->
@@ -42,4 +42,4 @@ module.exports = (robot) ->
           res.send "That went over my head: #{err} (jackie)"
           return 
         console.log data
-    res.send "#{note.date}"
+    res.send "#{url}"
