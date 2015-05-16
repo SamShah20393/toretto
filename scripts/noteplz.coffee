@@ -29,4 +29,4 @@ module.exports = (robot) ->
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
-    res.send "#(note.date)"
+    res.send "#{note.date}"
