@@ -29,4 +29,17 @@ module.exports = (robot) ->
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
+    url = "https://api.hipchat.com/v2/room/1494222/history?&date=2015-05-12&timezone=Asia/Tokyo&format=json&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+    console.log(url);
+    robot.http(url)
+      .get() (err, resp, body) ->
+        if err
+          res.send "(areyoukiddingme) Got stuck here : #{err} "
+          return
+        try  
+          data = JSON.parse(body)
+        catch error
+          res.send "That went over my head: #{err} (jackie)"
+          return 
+        console.log data
     res.send "#{note.date}"
