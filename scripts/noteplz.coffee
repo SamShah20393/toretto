@@ -36,15 +36,13 @@ module.exports = (robot) ->
       currentNote = robot.brain.get  noteTitle
       currentNote.total = currentNote.total + 1
       robot.brain.set noteTitle,currentNote
-      res.send "new line no #{currentNote.total}"
     else
-      res.send "AM too lazzy"
       noteMode = true
 
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
-    url = "https://api.hipchat.com/v2/room/Wergroot/history?&date=#{note.date}&timezone=Asia/Tokyo&format=json&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+    url = "https://api.hipchat.com/v2/room/Wergroot/history?&date=#{note.date}&timezone=Asia/Tokyo&format=json&max-result=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
     robot.http(url)
       .get() (err, resp, body) ->
@@ -65,4 +63,5 @@ module.exports = (robot) ->
     date = new Date
     currentNote.date = date 
     robot.brain.set noteTitle,currentNote
+    noteMode = false
     res.send "Okay sure done" 
