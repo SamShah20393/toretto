@@ -58,10 +58,8 @@ module.exports = (robot) ->
         console.log data
         noteData = parseNoteData data
         for item in data.items
-          console.log item.message
-        console.log "*******************"
-        console.log parseNoteData data
-    res.send "consoling"
+          noteData = noteData + item.message
+    res.send "noteData"
 
   robot.respond /save this note/i, (res) ->
     if noteMode
