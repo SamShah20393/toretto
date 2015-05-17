@@ -9,6 +9,7 @@
 #
 # Commands:
 #   torreto take notes
+#   torreto show notes about <context>
 #
 # Author
 #   Samkit
