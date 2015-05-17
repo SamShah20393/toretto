@@ -18,7 +18,7 @@
 class Note
   constructor: (@title,@date,@total) ->
 
-console.log "###### starting now""
+console.log "###### starting now"
 
 module.exports = (robot) ->
   
@@ -26,10 +26,10 @@ module.exports = (robot) ->
   noteTitle = null
   
   robot.respond /take notes about (.*)/i, (res) ->
-    title = res.match[1]
+    title = res.match[1] + res.message.room
     note = robot.brain.get title
     if note
-      res.send  "I already have this note "
+      res.send  "I already have this note , you can ask me again to take notes  a new name"
       return 
     noteTitle = title
     noteMode = true
@@ -46,7 +46,7 @@ module.exports = (robot) ->
       
 
   robot.hear /show notes about (.*)/i, (res) ->
-    title = res.match[1] 
+    title = res.match[1] + res.message.room
     note = robot.brain.get title
     noteData = ""
     url = "https://api.hipchat.com/v2/room/Wergroot/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
