@@ -59,6 +59,7 @@ module.exports = (robot) ->
 
         for item in data.items
           noteData = noteData + item.message
+          res.send item.message 
         console.log "**********************"
         console.log noteData
     res.send "I found this #{noteData}"
