@@ -61,13 +61,13 @@ module.exports = (robot) ->
           noteData = noteData + item.message + "\n"
         console.log "**********************"
         console.log noteData
-        res.send "Got the note"
+        res.send "this is what I found"
         res.send "#{noteData}" 
     
   robot.respond /save this note/i, (res) ->
     if noteMode
       currentNote = robot.brain.get  noteTitle
-      currentNote.total = currentNote.total - 1
+      currentNote.total = currentNote.total - 2
       date = getDate new Date
       currentNote.date = date 
       robot.brain.set noteTitle,currentNote
