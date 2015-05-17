@@ -27,9 +27,15 @@ module.exports = (robot) ->
     title = res.match[1]
     noteTitle = title
     date = new Date
+    newdate = date.getFullYear() + '-'
+        + pad(date.getMonth() + 1) + '-'
+        + pad(date.getDate()) + 'T'
+        + pad(date.getHours()) + ':'
+        + pad(date.getMinutes()) + ':'
+        + pad(date.getSeconds());
     note = new Note title,date,0
     robot.brain.set title,note
-    res.send "Sure, go ahead type in"
+    res.send "Sure, go ahead type in, saving for #{newdate}"
 
   robot.hear /(.*)/i, (res) ->
     if noteMode
@@ -38,11 +44,8 @@ module.exports = (robot) ->
       robot.brain.set noteTitle,currentNote
       res.send "new line no #{currentNote.total}"
     else
+      res.send "AM too lazzy"
       noteMode = true
-      date = new Date
-      strdate = date.format("isoDateTime")
-      res.send "#{strdate}"
-     
 
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
