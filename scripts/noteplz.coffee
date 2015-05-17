@@ -59,7 +59,7 @@ module.exports = (robot) ->
         noteData = parseNoteData data
         for item in data.items
           noteData = noteData + item.message
-    res.send "noteData"
+    res.send "I found this #{noteData}"
 
   robot.respond /save this note/i, (res) ->
     if noteMode
