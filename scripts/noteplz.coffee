@@ -9,7 +9,6 @@
 #
 # Commands:
 #   torreto take notes
-#   torreto clear all links
 #
 # Author
 #   Samkit
