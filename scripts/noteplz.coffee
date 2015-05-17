@@ -26,16 +26,10 @@ module.exports = (robot) ->
   robot.respond /take notes about (.*)/i, (res) ->
     title = res.match[1]
     noteTitle = title
-    date = new Date
-    newdate = date.getFullYear() + '-'
-        + pad(date.getMonth() + 1) + '-'
-        + pad(date.getDate()) + 'T'
-        + pad(date.getHours()) + ':'
-        + pad(date.getMinutes()) + ':'
-        + pad(date.getSeconds());
+    date = getDate new Date
     note = new Note title,date,0
     robot.brain.set title,note
-    res.send "Sure, go ahead type in, saving for #{newdate}"
+    res.send "Sure, go ahead type in, saving for #{date}"
 
   robot.hear /(.*)/i, (res) ->
     if noteMode
@@ -72,4 +66,7 @@ module.exports = (robot) ->
     currentNote.date = date 
     robot.brain.set noteTitle,currentNote
     noteMode = false
-    res.send "Okay sure done" 
+    res.send "Okay sure done"
+  
+  getDate = (date) -> date.getFullYear() + '-' + date.getMonth() + '-'+ date.getDate() + 'T'+ date.getHours() + ':'+ date.getMinutes() + ':' + date.getSeconds()
+ 
