@@ -58,12 +58,11 @@ module.exports = (robot) ->
         console.log data
 
         for item in data.items
-          noteData.push item.message
+          noteData.push item.message + "\n"
         console.log "**********************"
         console.log noteData
         res.send "Got the note"
-        for noteItem in noteData
-          res.send "#{noteItem}" 
+        res.send "#{noteData}" 
     
   robot.respond /save this note/i, (res) ->
     if noteMode
