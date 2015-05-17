@@ -62,6 +62,7 @@ module.exports = (robot) ->
           res.send item.message 
         console.log "**********************"
         console.log noteData
+    res.send noteData
     
   robot.respond /save this note/i, (res) ->
     if noteMode
