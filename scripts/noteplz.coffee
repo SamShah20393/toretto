@@ -56,9 +56,11 @@ module.exports = (robot) ->
           res.send "That went over my head: #{err} (jackie)"
           return 
         console.log data
+        console.log "**********************"
         noteData = parseNoteData data
         for item in data.items
           noteData = noteData + item.message
+          console.log noteData
     res.send "I found this #{noteData}"
 
   robot.respond /save this note/i, (res) ->
