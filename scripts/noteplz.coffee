@@ -26,6 +26,7 @@ module.exports = (robot) ->
   robot.respond /take notes about (.*)/i, (res) ->
     title = res.match[1]
     noteTitle = title
+    noteMode = true
     date = getDate new Date
     note = new Note title,date,0
     robot.brain.set title,note
@@ -36,8 +37,7 @@ module.exports = (robot) ->
       currentNote = robot.brain.get  noteTitle
       currentNote.total = currentNote.total + 1
       robot.brain.set noteTitle,currentNote
-    else
-      noteMode = true
+      
 
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
@@ -62,7 +62,7 @@ module.exports = (robot) ->
           res.send item.message 
         console.log "**********************"
         console.log noteData
-    res.send noteData
+    res.send "#{noteData}"
     
   robot.respond /save this note/i, (res) ->
     if noteMode
