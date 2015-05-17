@@ -59,6 +59,7 @@ module.exports = (robot) ->
         noteData = parseNoteData data
         for item in data.items
           console.log item.message
+        console.log parseNoteData data
     res.send "consoling"
 
   robot.respond /save this note/i, (res) ->
@@ -76,4 +77,4 @@ module.exports = (robot) ->
   getDate = (date) -> date.getFullYear() + '-' + (date.getMonth()+1) + '-'+ date.getDate() + 'T'+ date.getHours() + ':'+ date.getMinutes() + ':' + date.getSeconds()
 
   parseNoteData = (data) -> for item in data.items
-                            item.message
+                              console.log item.message
