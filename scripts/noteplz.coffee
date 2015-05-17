@@ -36,9 +36,7 @@ module.exports = (robot) ->
       currentNote = robot.brain.get  noteTitle
       currentNote.total = currentNote.total + 1
       robot.brain.set noteTitle,currentNote
-      res.send "new line no #{currentNote.total}"
     else
-      res.send "AM too lazzy"
       noteMode = true
 
   robot.hear /show notes about (.*)/i, (res) ->
@@ -62,7 +60,7 @@ module.exports = (robot) ->
   robot.respond /save this note/i, (res) ->
     currentNote = robot.brain.get  noteTitle
     currentNote.total = currentNote.total + 1
-    date = new Date
+    date = getDate new Date
     currentNote.date = date 
     robot.brain.set noteTitle,currentNote
     noteMode = false
