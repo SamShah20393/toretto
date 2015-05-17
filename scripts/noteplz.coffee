@@ -42,7 +42,7 @@ module.exports = (robot) ->
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1]
     note = robot.brain.get title
-    noteDate = ""
+    noteData = ""
     url = "https://api.hipchat.com/v2/room/Wergroot/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
     robot.http(url)
@@ -56,7 +56,7 @@ module.exports = (robot) ->
           res.send "That went over my head: #{err} (jackie)"
           return 
         console.log data
-        noteData = parseNoteData data
+
         for item in data.items
           noteData = noteData + item.message
         console.log "**********************"
