@@ -66,5 +66,5 @@ module.exports = (robot) ->
     noteMode = false
     res.send "Okay sure done"
   
-  getDate = (date) -> date.getFullYear() + '-' + date.getMonth() + '-'+ date.getDate() + 'T'+ date.getHours() + ':'+ date.getMinutes() + ':' + date.getSeconds()
+  getDate = (date) -> date.getFullYear() + '-' + (date.getMonth()+1) + '-'+ date.getDate() + 'T'+ date.getHours() + ':'+ date.getMinutes() + ':' + date.getSeconds()
  
