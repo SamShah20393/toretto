@@ -29,7 +29,7 @@ module.exports = (robot) ->
     title = res.match[1] + res.message.room
     note = robot.brain.get title
     if note
-      res.send  "I already have this note , you can ask me again to take notes with a new name"
+      res.send  "I already have this note , you can ask me again to take notes a new name"
       return 
     noteTitle = title
     noteMode = true
