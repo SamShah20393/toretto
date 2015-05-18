@@ -18,11 +18,10 @@
 class Note
   constructor: (@title,@date,@total) ->
 
-console.log "###### starting now"
 
 module.exports = (robot) ->
   
-  getRooms
+  getRooms robot
   
   robot.respond /take notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
@@ -93,7 +92,7 @@ module.exports = (robot) ->
   parseNoteData = (data) -> for item in data.items
                             item.message
 
-  getRooms = () ->
+  getRooms = (robot) ->
     console.log "Starting Now"
     url = "https://api.hipchat.com/v1/rooms/list?format=json&auth_token=cea75a927ad3dadb564884171c05e0"
     robot.http(url)
