@@ -51,9 +51,10 @@ module.exports = (robot) ->
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
     note = robot.brain.get title
+    robot.brain.remove res.message.room
     roomId = robot.brain.get res.message.room
     if !roomId
-      roomId = getRoomId res.message.room
+      getRoomId res.message.room
     noteData = ""
     url = "https://api.hipchat.com/v2/room/Wergroot/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
@@ -107,4 +108,6 @@ module.exports = (robot) ->
           console.log "That went over my head: #{err} (jackie)"
           return 
         console.log data
-        data
+        for room in data.items
+          robot.brain.set room.name.toLowerCase(),room.id
+          console.log room.name.toLowerCase() + room.id
