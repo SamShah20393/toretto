@@ -55,7 +55,7 @@ module.exports = (robot) ->
     roomId = robot.brain.get res.message.room
     if !roomId
       getRoomId res.message.room
-      roomId = robot.brain.get res.message.room
+      roomId = robot.brain.get res.message.room.toLowerCase
     noteData = ""
     url = "https://api.hipchat.com/v2/room/#{roomId}/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
