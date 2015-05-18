@@ -22,6 +22,7 @@ console.log "###### starting now"
 
 module.exports = (robot) ->
   
+  getRooms();
   
   robot.respond /take notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
@@ -91,3 +92,17 @@ module.exports = (robot) ->
 
   parseNoteData = (data) -> for item in data.items
                             item.message
+
+  getRooms = () ->
+    url = "https://api.hipchat.com/v2/room/auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+    robot.http(url)
+      .get() (err, resp, body) ->
+        if err
+          res.send "(areyoukiddqx1ingme) Got stuck here : #{err} "
+          return
+        try  
+          data = JSON.parse(body)
+        catch error
+          res.send "That went over my head: #{err} (jackie)"
+          return 
+        console.log data
