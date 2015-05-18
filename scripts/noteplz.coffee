@@ -36,7 +36,7 @@ module.exports = (robot) ->
     date = getDate new Date
     note = new Note title,date,0
     robot.brain.set title,note
-    robot.brain.set res.message.room + "noteMode" true
+    robot.brain.set res.message.room + "noteMode" "true"
     robot.brain.set res.message.room + "noteTitle" title   
     res.send "Sure, go ahead type in, saving for #{date}"
 
@@ -80,7 +80,7 @@ module.exports = (robot) ->
       date = getDate new Date
       currentNote.date = date 
       robot.brain.set noteTitle,currentNote
-      robot.brain.set res.message.room + "noteMode" false   
+      robot.brain.set res.message.room + "noteMode" "false"   
       res.send "Okay sure done"
     else
       res.send "Sorry, i think you for to ask me to take notes (sadpanda)"
