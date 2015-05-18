@@ -73,7 +73,7 @@ module.exports = (robot) ->
           res.send "That went over my head: #{err} (jackie)"
           return 
         try 
-          if res.statusCode isnt 200
+          if resp.statusCode isnt 200
             res.send "(philosoraptor) I dont think  I have such a note" 
             return
           for item in data.items
