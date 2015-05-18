@@ -18,10 +18,9 @@
 class Note
   constructor: (@title,@date,@total) ->
 
-  console.log robot
 
 module.exports = (robot) ->
-  
+
   robot.respond /take notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
     note = robot.brain.get title
@@ -52,6 +51,9 @@ module.exports = (robot) ->
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
     note = robot.brain.get title
+    roomId = robot.brain.get res.message.room
+    if !roomId
+      roomId = getRoomId res.message.room
     noteData = ""
     url = "https://api.hipchat.com/v2/room/Wergroot/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
@@ -91,9 +93,9 @@ module.exports = (robot) ->
   parseNoteData = (data) -> for item in data.items
                             item.message
 
-  getRooms = (robot) ->
+  getRoomId = (roomName) ->
     console.log "Starting Now"
-    url = "https://api.hipchat.com/v1/rooms/list?format=json&auth_token=cea75a927ad3dadb564884171c05e0"
+    url = "https://api.hipchat.com//v2/room?auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     robot.http(url)
       .get() (err, resp, body) ->
         if err
@@ -105,3 +107,4 @@ module.exports = (robot) ->
           console.log "That went over my head: #{err} (jackie)"
           return 
         console.log data
+        data
