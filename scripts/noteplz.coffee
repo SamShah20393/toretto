@@ -95,7 +95,7 @@ module.exports = (robot) ->
 
   getRooms = () ->
     console.log "Starting Now"
-    url = "https://api.hipchat.com/v2/room/auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+    url = "https://api.hipchat.com/v1/rooms/list?format=json&auth_token=cea75a927ad3dadb564884171c05e0"
     robot.http(url)
       .get() (err, resp, body) ->
         if err
