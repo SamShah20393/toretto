@@ -52,7 +52,6 @@ module.exports = (robot) ->
 
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
-    note = new Note null,null,null
     note = robot.brain.get title
     roomId = robot.brain.get res.message.room
     if !roomId
