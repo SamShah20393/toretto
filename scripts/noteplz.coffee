@@ -22,13 +22,16 @@ console.log "###### starting now"
 
 module.exports = (robot) ->
   
-  noteMode = false 
   noteTitle = null
   
   robot.respond /take notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
     note = robot.brain.get title
-    if note
+    noteMode = robot.brain.get res.message.room + "noteMode"
+    if noteMode
+      res.send  "I am already taking notes of this chat (challengeaccepted) "
+      return
+    if note 
       res.send  "I already have this note , you can ask me again to take notes  a new name"
       return 
     noteTitle = title
@@ -36,9 +39,12 @@ module.exports = (robot) ->
     date = getDate new Date
     note = new Note title,date,0
     robot.brain.set title,note
+    robot.brain.set res.message.room + "noteMode" true
+    robot.brain.set res.message.room + "noteTitle" title   
     res.send "Sure, go ahead type in, saving for #{date}"
 
   robot.hear /(.*)/i, (res) ->
+    noteMode = robot.brain.get res.message.room + "noteMode"
     if noteMode
       currentNote = robot.brain.get  noteTitle
       currentNote.total = currentNote.total + 1
@@ -69,12 +75,15 @@ module.exports = (robot) ->
         res.send "#{noteData}" 
     
   robot.respond /save this note/i, (res) ->
+    noteMode = robot.brain.get  res.message.room + "noteMode"
+    noteTitle = robot.brain.get res.message.room + "noteTitle"
     if noteMode
       currentNote = robot.brain.get  noteTitle
       currentNote.total = currentNote.total - 2
       date = getDate new Date
       currentNote.date = date 
       robot.brain.set noteTitle,currentNote
+      robot.brain.set res.message.room + "noteMode" false   
       noteMode = false
       res.send "Okay sure done"
     else
