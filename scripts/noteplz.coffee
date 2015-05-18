@@ -22,7 +22,6 @@ console.log "###### starting now"
 
 module.exports = (robot) ->
   
-  noteTitle = null
   
   robot.respond /take notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
