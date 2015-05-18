@@ -83,7 +83,6 @@ module.exports = (robot) ->
       currentNote.date = date 
       robot.brain.set noteTitle,currentNote
       robot.brain.set res.message.room + "noteMode" false   
-      noteMode = false
       res.send "Okay sure done"
     else
       res.send "Sorry, i think you for to ask me to take notes (sadpanda)"
