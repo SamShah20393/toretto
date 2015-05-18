@@ -8,7 +8,8 @@
 #   None
 #
 # Commands:
-#   torreto take notes
+#   torreto take notes about <context>
+#   torreto save this note
 #   torreto show notes about <context>
 #
 # Author
