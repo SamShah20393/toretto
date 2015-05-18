@@ -53,9 +53,11 @@ module.exports = (robot) ->
     note = robot.brain.get title
     robot.brain.remove res.message.room
     roomId = robot.brain.get res.message.room
-    getRoomId res.message.room
+    if !roomId
+      getRoomId res.message.room
+      roomId = robot.brain.get res.message.room
     noteData = ""
-    url = "https://api.hipchat.com/v2/room/Wergroot/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+    url = "https://api.hipchat.com/v2/room/#{roomId}/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
     robot.http(url)
       .get() (err, resp, body) ->
@@ -92,10 +94,10 @@ module.exports = (robot) ->
 
   parseNoteData = (data) -> for item in data.items
                             item.message
-                            
+
   getRoomId = (roomName) ->
     console.log "Starting Now"
-    url = "https://api.hipchat.com/v2/room?auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+    url = "https://api.hipchat.com//v2/room?auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     robot.http(url)
       .get() (err, resp, body) ->
         if err
