@@ -18,10 +18,9 @@
 class Note
   constructor: (@title,@date,@total) ->
 
+  console.log robot
 
 module.exports = (robot) ->
-  
-  getRooms robot
   
   robot.respond /take notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
