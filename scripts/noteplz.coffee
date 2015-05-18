@@ -25,6 +25,7 @@ module.exports = (robot) ->
     title = res.match[1] + res.message.room
     note = robot.brain.get title
     noteMode = robot.brain.get res.message.room + "noteMode"
+    roomId = robot.brain.get res.message.room
     if noteMode
       res.send  "I am already taking notes of this chat (challengeaccepted) "
       return
@@ -34,9 +35,10 @@ module.exports = (robot) ->
     date = getDate new Date
     note = new Note title,date,0
     robot.brain.set title,note
-
     robot.brain.set res.message.room + "noteMode",true
     robot.brain.set res.message.room + "noteTitle",title   
+    if !roomId
+      getRoomId res.message.room
     res.send "Sure, go ahead type in, saving for #{date}"
 
   robot.hear /(.*)/i, (res) ->
@@ -55,6 +57,8 @@ module.exports = (robot) ->
     if !roomId
       getRoomId res.message.room
       roomId = robot.brain.get res.message.room.toLowerCase
+      res.send "I seem to have messed something up, hold on please and try again"
+      return
     noteData = ""
     url = "https://api.hipchat.com/v2/room/#{roomId}/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
     console.log(url);
