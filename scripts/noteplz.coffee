@@ -61,29 +61,32 @@ module.exports = (robot) ->
       res.send "I seem to have messed something up, hold on please and try again"
       return
     noteData = ""
-    url = "https://api.hipchat.com/v2/room/#{roomId}/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
-    console.log(url);
-    robot.http(url)
-      .get() (err, resp, body) ->
-        if err
-          res.send "(areyoukiddqx1ingme) Got stuck here : #{err} "
-          return
-        try  
-          data = JSON.parse(body)
-        catch error
-          res.send "That went over my head: #{err} (jackie)"
-          return 
-        try 
-          if resp.statusCode isnt 200
-            res.send "(philosoraptor) I dont think, I have such a note" 
+    try
+      url = "https://api.hipchat.com/v2/room/#{roomId}/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+      console.log(url);
+      robot.http(url)
+        .get() (err, resp, body) ->
+          if err
+            res.send "(areyoukiddqx1ingme) Got stuck here : #{err} "
             return
-          for item in data.items
-            noteData = noteData + item.message + "\n"
-          res.send "this is what I found"
-          res.send "#{noteData}"
-        catch error
-          res.send "Something went wrong" 
-    
+          try  
+            data = JSON.parse(body)
+          catch error
+            res.send "That went over my head: #{err} (jackie)"
+            return 
+          try 
+            if resp.statusCode isnt 200
+              res.send "(philosoraptor) I dont think, I have such a note" 
+              return
+            for item in data.items
+              noteData = noteData + item.message + "\n"
+            res.send "this is what I found"
+            res.send "#{noteData}"
+          catch error
+            res.send "Something went wrong" 
+    catch
+      res.send "(philosoraptor) I dont think, I have such a note" 
+      
   robot.respond /save this note/i, (res) ->
     noteMode = robot.brain.get  res.message.room + "noteMode"
     noteTitle = robot.brain.get res.message.room + "noteTitle"
