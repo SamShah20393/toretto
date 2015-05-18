@@ -72,13 +72,16 @@ module.exports = (robot) ->
         catch error
           res.send "That went over my head: #{err} (jackie)"
           return 
-        try  
+        try 
+          if res.statusCode isnt 200
+            res.send "(philosoraptor) I dont think  I have such a note" 
+            return
           for item in data.items
             noteData = noteData + item.message + "\n"
           res.send "this is what I found"
           res.send "#{noteData}"
         catch error
-          res.send "I dont seem to have any such note" 
+          res.send "Something went wrong" 
     
   robot.respond /save this note/i, (res) ->
     noteMode = robot.brain.get  res.message.room + "noteMode"
