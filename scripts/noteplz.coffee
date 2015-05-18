@@ -43,6 +43,7 @@ module.exports = (robot) ->
 
   robot.hear /(.*)/i, (res) ->
     noteMode = robot.brain.get res.message.room + "noteMode"
+    noteTitle = robot.brain.get res.message.room + "noteTitle"
     if noteMode
       currentNote = robot.brain.get  noteTitle
       currentNote.total = currentNote.total + 1
