@@ -52,6 +52,7 @@ module.exports = (robot) ->
 
   robot.hear /show notes about (.*)/i, (res) ->
     title = res.match[1] + res.message.room
+    note = new Note null,null,null
     note = robot.brain.get title
     roomId = robot.brain.get res.message.room
     if !roomId
@@ -74,7 +75,7 @@ module.exports = (robot) ->
           return 
         try 
           if resp.statusCode isnt 200
-            res.send "(philosoraptor) I dont think  I have such a note" 
+            res.send "(philosoraptor) I dont think, I have such a note" 
             return
           for item in data.items
             noteData = noteData + item.message + "\n"
