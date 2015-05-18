@@ -72,12 +72,13 @@ module.exports = (robot) ->
         catch error
           res.send "That went over my head: #{err} (jackie)"
           return 
-        console.log data
-
-        for item in data.items
-          noteData = noteData + item.message + "\n"
-        res.send "this is what I found"
-        res.send "#{noteData}" 
+        try  
+          for item in data.items
+            noteData = noteData + item.message + "\n"
+          res.send "this is what I found"
+          res.send "#{noteData}"
+        catch error
+          res.send "I dont seem to have any such note" 
     
   robot.respond /save this note/i, (res) ->
     noteMode = robot.brain.get  res.message.room + "noteMode"
@@ -111,7 +112,6 @@ module.exports = (robot) ->
         catch error
           console.log "That went over my head: #{err} (jackie)"
           return 
-        console.log data
         for room in data.items
           robot.brain.set room.name.toLowerCase(),room.id
           console.log room.name.toLowerCase() + room.id
