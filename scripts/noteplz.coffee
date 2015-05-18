@@ -33,8 +33,6 @@ module.exports = (robot) ->
     if note 
       res.send  "I already have this note , you can ask me again to take notes  a new name"
       return 
-    noteTitle = title
-    noteMode = true
     date = getDate new Date
     note = new Note title,date,0
     robot.brain.set title,note
