@@ -8,7 +8,8 @@ module.exports = (robot) ->
           time = new Date()
           hour = time.getHours()
           for message in messages.items
-            console.log Date.parse(message.date) 
+            dat = Date.parse(message.date) 
+            console.log dat.inspect
         catch
           res.send "Something went wrong!"
           console.log err
