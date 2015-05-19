@@ -11,7 +11,7 @@ module.exports = (robot) ->
           for message in messages.items
             hour = parseInt(message.date.match(/T(..):/)[1],10) 
             if ( 12 <= hour < 1)
-              if message.message.match(/do|start|kill|create|prepare/)
+              if message.message.match(/do/)
                 relevant_messages[hour].push(message.message)
                 console.log message.message          
         catch e
