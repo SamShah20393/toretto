@@ -42,11 +42,13 @@ class Reminders
       if @cache.length > 0
         trigger = =>
           reminder = @removeFirst()
-          @robot.reply reminder.msg_envelope, 'you asked me to remind you to ' + reminder.action
-          @queue()
           refreshreminder = new Reminder reminder.msg_envelope, reminder.time, reminder.action
           @add refreshreminder
+          console.log "##### Next would be #{refreshreminder.dueDate()}"
+
           
+          @robot.reply reminder.msg_envelope, 'you asked me to remind you to ' + reminder.action
+          @queue()
         # setTimeout uses a 32-bit INT
         extendTimeout = (timeout, callback) ->
           if timeout > 0x7FFFFFFF
@@ -83,9 +85,12 @@ class Reminder
       matches = pattern.exec(@time)
       periods[period].value = parseInt(matches[1]) if matches
     
-    @due = new Date().getTime()
-    @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
-    console.log "##### Next would be #{@dueDate()}"
+    if @nextdue
+      @due = @nextdue
+    else
+      @due = new Date().getTime()
+      @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
+    @nextdue += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
     
   dueDate: ->
     dueDate = new Date @due
