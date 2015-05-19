@@ -11,6 +11,6 @@ module.exports = (robot) ->
             hour = ParseInt(message.date.match(/T(..):/),1) 
             if ( 11 <= hour < 12)
                console.log message.message
-        catch
+        catch e
           res.send "Something went wrong!"
-          console.log err
+          console.log e
