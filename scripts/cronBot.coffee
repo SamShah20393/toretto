@@ -83,12 +83,8 @@ class Reminder
       matches = pattern.exec(@time)
       periods[period].value = parseInt(matches[1]) if matches
     
-    if @nextdue
-      @due = @nextdue
-    else
-      @due = new Date().getTime()
-      @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
-    @nextdue += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
+    @due = new Date().getTime()
+    @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
     console.log "##### Next would be #{@dueDate()}"
     
   dueDate: ->
