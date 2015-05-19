@@ -6,9 +6,11 @@ module.exports = (robot) ->
           relevant_messages = []
           messages = JSON.parse(body)
           time = new Date()
-          hour = time.getHours()
+          current_hour = time.getHours()
+          
           for message in messages.items
             hour = parseInt(message.date.match(/T(..):/)[1],10) 
+            console.log hour
             if ( 9 <= hour < 10)
                console.log message.message
         catch e
