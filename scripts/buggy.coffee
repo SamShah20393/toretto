@@ -1,5 +1,5 @@
 module.exports = (robot) ->
-  robot.resond "/intuition/i", (res) ->
+  robot.respond "/intuition/i", (res) ->
     res.http("https://api.hipchat.com/v2/room/1494222/history?auth_token=#{process.env.HIPCHAT_AUTH_TOKEN}")
       .get() (err, resp, body) ->
         try
