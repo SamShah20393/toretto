@@ -8,7 +8,7 @@ module.exports = (robot) ->
           time = new Date()
           hour = time.getHours()
           for message in messages.items
-            hour = ParseInt(message.date.match(/T(..):/)) 
+            hour = ParseInt(message.date.match(/T(..):/),1) 
             if ( 11 <= hour < 12)
                console.log message.message
         catch
