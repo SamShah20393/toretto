@@ -45,7 +45,7 @@ class Reminders
           refreshreminder = new Reminder reminder.msg_envelope, reminder.time, reminder.action
           @robot.reply reminder.msg_envelope, 'you asked me to remind you to ' + reminder.action
           @queue()
-          @add refreshreminder #Adding for repeatation
+          @add refreshreminder
           console.log "##### Next would be #{refreshreminder.dueDate()}"
 
         # setTimeout uses a 32-bit INT
@@ -110,7 +110,7 @@ module.exports = (robot) ->
     reminders.add reminder
     msg.send 'I\'ll remind you to ' + action + ' on ' + reminder.dueDate()
 
-  robot.respond /every ((?:(?:\d+) (?:hours?|hrs?|minutes?|mins?|seconds?|secs?)[ ,]*(?:and)? +)+) say (.*)/i, (msg) ->
+  robot.respond /remind me every ((?:(?:\d+) (?:hours?|hrs?|minutes?|mins?|seconds?|secs?)[ ,]*(?:and)? +)+)to (.*)/i, (msg) ->
     time = msg.match[1]
     action = msg.match[2]
     reminder = new Reminder msg.envelope, time, action
