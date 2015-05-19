@@ -83,6 +83,9 @@ class Reminder
     @due = new Date().getTime()
     @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
     console.log "This time its #{@due} Next would be #{@due + @due}"
+    @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
+    console.log "This time its #{@due} Next would be #{@due + @due}"
+    
   dueDate: ->
     dueDate = new Date @due
     dueDate.toLocaleString()
