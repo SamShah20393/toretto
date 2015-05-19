@@ -43,12 +43,11 @@ class Reminders
         trigger = =>
           reminder = @removeFirst()
           refreshreminder = new Reminder reminder.msg_envelope, reminder.time, reminder.action
+          @robot.reply reminder.msg_envelope, 'you asked me to remind you to ' + reminder.action
+          @queue()
           @add refreshreminder
           console.log "##### Next would be #{refreshreminder.dueDate()}"
 
-          
-          @robot.reply reminder.msg_envelope, 'you asked me to remind you to ' + reminder.action
-          @queue()
         # setTimeout uses a 32-bit INT
         extendTimeout = (timeout, callback) ->
           if timeout > 0x7FFFFFFF
