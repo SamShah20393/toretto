@@ -98,7 +98,7 @@ module.exports = (robot) ->
     reminders.add reminder
     msg.send 'I\'ll remind you to ' + action + ' on ' + reminder.dueDate()
 
-  robot.respond /remind me every (.*) hours to do (.*)/i, (msg) ->
+  robot.respond /remind me every ((?:(?:\d+) (?:hours?|hrs?|minutes?|mins?|seconds?|secs?)[ ,]*(?:and)? +)+)to (.*)/i, (msg) ->
     time = msg.match[1]
     action = msg.match[2]
     reminder = new Reminder msg.envelope, time, action
