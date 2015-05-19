@@ -7,11 +7,13 @@ module.exports = (robot) ->
           messages = JSON.parse(body)
           time = new Date()
           current_hour = time.getHours()
-          
+          console.log current_hour - 1
           for message in messages.items
             hour = parseInt(message.date.match(/T(..):/)[1],10) 
-            if ( 8 <= hour < 9)
-               console.log message.message
+            if ( (current_hour - 1) <= hour < current_hour)
+              if messages.match(/do|start|kill|create|prepare/)
+                relevant_messages[hour].push(message.message)
+                console.log message.message
         catch e
           res.send "Something went wrong!"
           console.log e
