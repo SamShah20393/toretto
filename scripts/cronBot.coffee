@@ -43,7 +43,7 @@ class Reminders
         trigger = =>
           reminder = @removeFirst()
           @robot.reply reminder.msg_envelope, 'you asked me to remind you to ' + reminder.action
-          @add reminder
+          reminder = new reminder.msg_envelope, reminder.time, reminder.action
           @queue()
         # setTimeout uses a 32-bit INT
         extendTimeout = (timeout, callback) ->
@@ -87,7 +87,7 @@ class Reminder
       @due = new Date().getTime()
       @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
     @nextdue += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
-    console.log "##### Next would be #{@nextdueDate()}"
+    console.log "##### Next would be #{@dueDate()}"
     
   dueDate: ->
     dueDate = new Date @due
