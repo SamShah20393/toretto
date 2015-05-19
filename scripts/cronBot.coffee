@@ -98,3 +98,10 @@ module.exports = (robot) ->
     reminder = new Reminder msg.envelope, time, action
     reminders.add reminder
     msg.send 'I\'ll remind you to ' + action + ' on ' + reminder.dueDate()
+
+  robot.respond /remind me every (.*) hours to do (.*)/i, (msg) ->
+    time = msg.match[1]
+    action = msg.match[2]
+    reminder = new Reminder msg.envelope, time, action
+    reminders.add reminder
+    msg.send 'I\'ll remind you to ' + action + ' on ' + reminder.dueDate()  
