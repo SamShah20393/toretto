@@ -49,7 +49,7 @@ class Reminders
       @removeFirst() until @cache.length is 0 or @cache[0].due > now
       if @cache.length > 0
         trigger = =>
-          reminder = @removeFirst()
+          reminder = @refreshFirst()
           @queue()
         # setTimeout uses a 32-bit INT
         extendTimeout = (timeout, callback) ->
