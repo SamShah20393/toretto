@@ -33,7 +33,15 @@ class Reminders
     reminder = @cache.shift()
     @robot.brain.data.reminders = @cache
     return reminder
-
+  
+  refreshFirst: ->
+    reminder = @cache.shift()
+    reminder.refresh
+    @add reminder 
+    @robot.brain.data.reminders = @cache
+    return reminder
+  
+ 
   queue: ->
     clearTimeout @current_timeout if @current_timeout
     if @cache.length > 0
@@ -42,12 +50,7 @@ class Reminders
       if @cache.length > 0
         trigger = =>
           reminder = @removeFirst()
-          refreshreminder = new Reminder reminder.msg_envelope, reminder.time, reminder.action
-          @robot.reply reminder.msg_envelope, 'you asked me to remind you to ' + reminder.action
           @queue()
-          @add refreshreminder
-          console.log "##### Next would be #{refreshreminder.dueDate()}"
-
         # setTimeout uses a 32-bit INT
         extendTimeout = (timeout, callback) ->
           if timeout > 0x7FFFFFFF
@@ -57,7 +60,7 @@ class Reminders
           else
             @current_timeout = setTimeout callback, timeout
         extendTimeout @cache[0].due - now, trigger
-
+   
 class Reminder
   constructor: (@msg_envelope, @time, @action) ->
     @time.replace(/^\s+|\s+$/g, '')
@@ -98,6 +101,12 @@ class Reminder
   nextdueDate: ->
     dueDate = new Date @nextdue
     dueDate.toLocaleString()
+  
+  refresh: ->
+    @due = new Date().getTime()
+    @due += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
+    @nextdue += ((periods.weeks.value * 604800) + (periods.days.value * 86400) + (periods.hours.value * 3600) + (periods.minutes.value * 60) + periods.seconds.value) * 1000
+    console.log "Refreshing token for #{@dueDate}"
 
 module.exports = (robot) ->
 
