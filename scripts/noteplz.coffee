@@ -59,10 +59,10 @@ module.exports = (robot) ->
       getRoomId res.message.room
       roomId = robot.brain.get res.message.room.toLowerCase
       res.send "I seem to have messed something up, hold on please and try again"
-      return
+      #return
     noteData = ""
     try
-      url = "https://api.hipchat.com/v2/room/#{roomId}/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
+      url = "https://api.hipchat.com/v2/room/bhaiKiroom/history?date=#{note.date}&format=json&max-results=#{note.total}&auth_token=1coJkivHvITLQx343j75ziWKvjZX5VHG1Faus4hz"
       console.log(url);
       robot.http(url)
         .get() (err, resp, body) ->
