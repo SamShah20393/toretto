@@ -7,7 +7,7 @@ module.exports = (robot) ->
   robot.hear /#(.*)#/i, (res) ->
     word = res.match[1]
     lang = "en"
-    url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&target=en&q=#{word}"
+    url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyDwV3lBHKVFwS3S2m7t0uzvL4FY2tTIVs0&target=en&q=#{word}"
     console.log(url);
     robot.http(url)
       .get() (err, resp, body) ->
@@ -21,7 +21,7 @@ module.exports = (robot) ->
           return 
         lang = data.data.translations[0].detectedSourceLanguage
         if lang is 'en'
-          url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyBfy0SB_eRGbNC-0sVo6qTS9NGex8fo_2s&source=en&target=ja&q=#{word}"
+          url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyDwV3lBHKVFwS3S2m7t0uzvL4FY2tTIVs0&source=en&target=ja&q=#{word}"
           console.log url
           robot.http(url)
           .get() (err, resp, body) ->
